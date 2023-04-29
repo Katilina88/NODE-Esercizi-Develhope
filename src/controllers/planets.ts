@@ -64,10 +64,25 @@ const deleteById = async (req: Request, res: Response) => {
   res.status(200).json({ msg: `Planet ${id} deleted` });
 };
 
+const createImage = async (req: Request, res: Response) => {
+  const { file } = req;
+  const { id } = req.params;
+  const fileName = file?.path;
+
+  if (!fileName) {
+    res.status(400).json({ msg: "Planet image failed" });
+    return;
+  }
+
+  db.none("UPDATE planets SET image=$2 WHERE id=$1", [Number(id), fileName]);
+  res.status(201).json({ msg: "Planet image was uploaded" });
+};
+
 export {
   getAll,
   getOneById,
   create,
   updatedById,
   deleteById,
+  createImage
 };
