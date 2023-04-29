@@ -29,10 +29,6 @@ const setupDb = async () => {
 
 setupDb();
 
-const schema = Joi.object({
-  id: Joi.number().integer().required(),
-  name: Joi.string().required(),
-});
 
 const getAll = async (req: Request, res: Response) => {
   const planets = await db.many("SELECT * FROM planets;");
