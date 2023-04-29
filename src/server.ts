@@ -15,16 +15,16 @@ app.use(express.json());
 
 
 
-app.get('/api/planets', ); 
+app.get('/api/planets', getAll ); 
 
-app.get('/api/planets/:id', );
+app.get('/api/planets/:id', getOneById);
 
 
-app.post('/api/planets', );
+app.post('/api/planets',create );
 
-app.put('/api/planets/:id', );
+app.put('/api/planets/:id', updateById );
 
-app.delete("/api/planets/:id", );
+app.delete("/api/planets/:id", deleteById  );
 
 app.listen(port, () => {
   console.log(`example app running on port http://localhost:${port}`);
