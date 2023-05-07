@@ -6,6 +6,7 @@ import "./passport.js";
 
 import Joi from "joi";
 import { getAll, getOneById, create, updatedById, deleteById, createImage} from "./controllers/planets"
+import { logIn, signUp } from "./controllers/users.js";
 
 
 const dotenv = require('dotenv');
@@ -46,7 +47,10 @@ app.post("/api/planets/:id/image", upload.single("image"), createImage)
 
 
 
-app.post("api/users");
+app.post("/api/users/signup", signUp);
+app.post("/api/users/login", logIn); 
+
+
 
 app.listen(port, () => {
   console.log(`example app running on port http://localhost:${port}`);
