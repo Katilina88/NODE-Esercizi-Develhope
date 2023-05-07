@@ -20,7 +20,7 @@ const logIn = async (req: Request, res: Response) => {
         const { SECRET = " " } = process.env
         const token = jwt.sign(payload,SECRET); 
         await db.none(`UPDATE users SET token=$2 WHERE id=$1`,[user.id, token] )
-        res.status(200).json({id: user.id, username, token})
+        res.status(200).json({})
 
     } else {
         res.status(400).json({ msg: "username or password incorrect."})
@@ -40,6 +40,11 @@ const signUp = async (req: Request, res: Response) => {
     res.status(201).json ({  msg: "user created successfully"})
 }
 }
+const logOut = async (req: AuthRequest, res: Response) => {
+    const user = req.user;
+    await db.none(`UPDATE users SET token=$2 WHERE id=$1`, [user?.id, null])
+    res.status(200).json({ msg: "logout successful"})
+  }
+  
 
-
-export {logIn, signUp }
+export {logIn, signUp, logOut}
