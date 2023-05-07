@@ -1,11 +1,12 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
-    "strict": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
     "outDir": "./dist",
-    "module": "es6",
-    "target": "ES6"
+    "rootDir": "./src",
+    "sourceMap": true
   },
-  "include": ["./src/**/*.ts"],
-  "exclude": ["./src/**/*.test.js"]
+  "include": ["src/**/*", "dist/server.cjs"],
+  "exclude": ["node_modules"]
 }

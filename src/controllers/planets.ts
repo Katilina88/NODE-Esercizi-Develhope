@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import pgPromise from "pg-promise"; 
+import pgPromise from "pg-promise";
 import express from "express";
 
 const dotenv = require('dotenv');
@@ -15,19 +15,7 @@ const { DATABASE_URL } = process.env;
 export const db = pgPromise()(DATABASE_URL);
 
 
-const setupDb = async () => {
-  await db.none(`
-    DROP TABLE IF EXISTS planets;
-    CREATE TABLE planets (
-        id SERIAL NOT NULL PRIMARY KEY,
-        name TEXT NOT NULL
-    );
-    INSERT INTO planets (name) VALUES ('Earth');
-    INSERT INTO planets (name) VALUES ('Mars');
-  `);
-};
 
-setupDb();
 
 const schema = Joi.object({
   id: Joi.number().integer().required(),
